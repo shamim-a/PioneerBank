@@ -13,3 +13,18 @@ body{
 #h1-text{
     color: #f85fac;
 }
+.status{
+    margin: 0 20px;
+    border-radius: 10px;
+    color: whitesmoke;
+    padding: 15px;
+}
+.deposit{
+    background-color: slateblue;
+}
+.withdraw{
+    background-color: lightsalmon;
+}
+.balance{
+    background-color: orange;
+}

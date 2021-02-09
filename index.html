@@ -24,11 +24,54 @@
             <button id="login" class="btn btn-success">Login</button>
         </div>
     </div>
+    <!-- transaction Area -->
     <div id="transaction-area">
-        <h1 id="h1-text" class="text-center">I Love You ❤</h1>
-        <h2 class="text-center"> I wanna______you. 🤞🏻💋🤏🏻</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="deposit status">
+                    <h5>Deposit</h5>
+                    <h2>$ <span id="currentDeposit">00</span></h2>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="withdraw status">
+                    <h5>Withdraw</h5>
+                    <h2>$ <span id="currentWithdraw">00</span></h2>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="balance status">
+                    <h5>Balance</h5>
+                    <h2>$ <span id="currentBalance">1250</span></h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="submit-area">
+                    <h3>Deposit</h3>
+                    <br>
+                    <input id="depositAmount" type="text" class="form-control"
+                        placeholder="$ amount you can deposit here">
+                    <br>
+                    <button id="addDeposit" class="btn btn-success">Deposit</button>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="submit-area">
+                    <h3>Withdraw</h3>
+                    <br>
+                    <input id="withdrawAmount" type="text" class="form-control"
+                        placeholder="$ amount you can withdraw here">
+                    <br>
+                    <button id="addWithdraw" class="btn btn-success">Withdraw</button>
+                </div>
+            </div>
+        </div>
     </div>
     <script>
+        // login Button even handler
         const loginBtn = document.getElementById('login');
         loginBtn.addEventListener('click', function () {
             const loginArea = document.getElementById('login-area');
@@ -36,6 +79,47 @@
             const transactionArea = document.getElementById('transaction-area');
             transactionArea.style.display = 'block';
         })
+
+        // deposit Button even handler
+        const depositBtn = document.getElementById('addDeposit');
+        depositBtn.addEventListener('click', function () {
+            const depositAmnt = document.getElementById('depositAmount').value;
+            const depositNumber = parseFloat(depositAmnt);
+
+            // deposit into balance
+
+            updateSpanText('currentDeposit', depositNumber);
+
+            updateSpanText('currentBalance', depositNumber);
+
+            document.getElementById('depositAmount').value = "";
+        })
+
+        // withdraw button handler
+
+        const withdrawBtn = document.getElementById('addWithdraw');
+        withdrawBtn.addEventListener('click', function () {
+            const withdrawAmount = document.getElementById('withdrawAmount').value;
+            const withdrawNumber = parseFloat(withdrawAmount);
+
+            /* const currentBalance = document.getElementById('currentBalance').innerText;
+            const balance = parseFloat(currentBalance);
+            const totalBalance = balance - withdrawNumber;
+            document.getElementById('currentBalance').innerText = totalBalance; */
+
+            updateSpanText('currentBalance', -1 * withdrawNumber)
+
+            updateSpanText('currentWithdraw', withdrawNumber)
+
+            document.getElementById('withdrawAmount').value = "";
+        })
+
+        function updateSpanText(id, deposit) {
+            const current = document.getElementById(id).innerText;
+            const currenNum = parseFloat(current);
+            const total = deposit + currenNum;
+            document.getElementById(id).innerText = total;
+        }
     </script>
 </body>
 
